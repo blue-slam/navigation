@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+
+<launch>
+    <arg name="machine"/>
+    <arg name="stereo" value="false"/>
+    <arg name="rtabmapviz" value="false"/>
+    <arg name="rviz" value="false"/>
+
+    <arg name="cfg" value=""/>
+    <arg name="gui_cfg" value="~/.ros/rtabmap_gui.ini"/>
+    <arg name="rviz_cfg" value="-d $(find rtabmap_ros)/launch/config/rgbd.rviz"/>
+
+    <arg name="frame_id" value="camera_link"/>
+    <arg name="namespace" value="rtabmap"/>
+    <arg name="database_path" value="rtabmap.db"/>
+    <arg name="queue_size" value="10"/>
+    <arg name="wait_for_transform" value="0.2"/>
+    <arg name="rtabmap_args" value="--delete_db_on_start"/>
+    <arg name="launch_prefix" value=""/>
+    <arg name="approx_sync" value="true"/>
+
+    <!-- RGB-D related topics -->
+    <arg name="rgb_topic" value="/camera/rgb/image_rect_color"/>
+    <arg name="depth_topic" value="/camera/depth_registered/sw_registered/image_rect_raw"/>
+    <arg name="camera_info_topic" value="/camera/rgb/camera_info"/>
+
+    <!-- stereo related topics -->
+    <arg name="stereo_namespace" value="/stereo_camera"/>
+    <arg name="left_image_topic" value="$(arg stereo_namespace)/left/image_rect_color"/>
+    <arg name="right_image_topic" value="$(arg stereo_namespace)/right/image_rect"/>
+    <arg name="left_camera_info_topic" value="$(arg stereo_namespace)/left/camera_info"/>
+    <arg name="right_camera_info_topic" value="$(arg stereo_namespace)/right/camera_info"/>
+
+    <arg name="compressed" value="false"/>
+    <arg name="rgb_image_transport" value="theora"/>
+
+    <arg name="subscribe_scan" value="true"/>
+    <arg name="scan_topic" value="/camera/scan"/>
+
+    <arg name="subscribe_scan_cloud" value="false"/>
+    <arg name="scan_cloud_topic" value="/scan_cloud"/>
+
+    <arg name="visual_odometry" value="false"/>
+    <arg name="odom_topic" value="/odometry/filtered"/>
+    <arg name="odom_args" value="$(arg rtabmap_args)"/>
+
+    <include file="$(find navigation)/launch/includes/rtabmap.launch.xml">
+        <arg name="machine" value="$(arg machine)"/>
+        <arg name="stereo" value="$(arg stereo)"/>
+        <arg name="rtabmapviz" value="$(arg rtabmapviz)"/>
+        <arg name="rviz" value="$(arg rviz)"/>
+
+        <arg name="cfg" value="$(arg cfg)"/>
+        <arg name="gui_cfg" value="$(arg gui_cfg)"/>
+        <arg name="rviz_cfg" value="$(arg rviz_cfg)"/>
+
+        <arg name="frame_id" value="$(arg frame_id)"/>
+        <arg name="namespace" value="$(arg namespace)"/>
+        <arg name="database_path" value="$(arg database_path)"/>
+        <arg name="queue_size" value="$(arg queue_size)"/>
+        <arg name="wait_for_transform" value="$(arg wait_for_transform)"/>
+        <arg name="rtabmap_args" value="$(arg rtabmap_args)"/>
+        <arg name="launch_prefix" value="$(arg launch_prefix)"/>
+        <arg name="approx_sync" value="$(arg approx_sync)"/>
+
+        <!-- RGB-D related topics -->
+        <arg name="rgb_topic" value="$(arg rgb_topic)"/>
+        <arg name="depth_topic" value="$(arg depth_topic)"/>
+        <arg name="camera_info_topic" value="$(arg camera_info_topic)"/>
+
+        <!-- stereo related topics -->
+        <arg name="stereo_namespace" value="$(arg stereo_namespace)"/>
+        <arg name="left_image_topic" value="$(arg left_image_topic)"/>
+        <arg name="right_image_topic" value="$(arg right_image_topic)"/>
+        <arg name="left_camera_info_topic" value="$(arg left_camera_info_topic)"/>
+        <arg name="right_camera_info_topic" value="$(arg right_camera_info_topic)"/>
+
+        <arg name="compressed" value="$(arg compressed)"/>
+        <arg name="rgb_image_transport" value="$(arg rgb_image_transport)"/>
+
+        <arg name="subscribe_scan" value="$(arg subscribe_scan)"/>
+        <arg name="scan_topic" value="$(arg scan_topic)"/>
+
+        <arg name="subscribe_scan_cloud" value="$(arg subscribe_scan_cloud)"/>
+        <arg name="scan_cloud_topic" value="$(arg scan_cloud_topic)"/>
+
+        <arg name="visual_odometry" value="$(arg visual_odometry)"/>
+        <arg name="odom_topic" value="$(arg odom_topic)"/>
+        <arg name="odom_args" value="$(arg odom_args)"/>
+
+    </include>
+
+</launch>
+

@@ -1,0 +1,30 @@
+frame_id: base_link
+map_frame_id: map
+odom_frame_id: odom
+subscribe_depth: true
+subscribe_scan: true
+queue_size: 10
+publish_tf: true
+database_path: ~/Workspace/blue-slam/rtabmap.db
+approx_sync: true
+latch: true
+RGBD:
+  ProximityBySpace: false
+  AngularUpdate: 0.01
+  LinearUpdate: 0.01
+  OptimizeFromGraphEnd: false
+Optimizer:
+  Slam2D: true
+Reg:
+  Strategy: 1
+  Force3DoF: true
+Viz:
+  MaxDepth: 4.0
+  MinInliers: 5
+  InlierDistance: 0.05
+Rtabmap:
+  TimeThr: 700
+Mem:
+  RehearsalSimilarity: 0.45
+Icp:
+  CorrespondenceRatio: 0.5

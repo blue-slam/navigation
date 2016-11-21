@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+
+<launch>
+    <arg name="machine"/>
+
+    <node pkg="move_base" type="move_base" name="move_base" machine="$(arg machine)" respawn="false" output="screen">
+        <rosparam file="$(find navigation)/params/costmap_common.yaml" command="load" ns="global_costmap" />
+        <rosparam file="$(find navigation)/params/costmap_common.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find navigation)/params/local_costmap.yaml" command="load" />
+        <rosparam file="$(find navigation)/params/global_costmap.yaml" command="load" />
+        <rosparam file="$(find navigation)/params/local_planner.yaml" command="load" />
+        <param name="controller_frequency" value="10.0"/>
+        <remap from="odom" to="odometry/filtered" />
+        <!--<remap from="map" to="/rtabmap/proj_map"/>-->
+        <!--<remap from="map" to="projected_map"/>-->
+    </node>
+
+</launch>
